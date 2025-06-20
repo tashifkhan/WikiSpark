@@ -386,7 +386,7 @@ export const ArticleViewer = ({
           }
           .wikipedia-content .infobox, .wikipedia-content .sidebox, .wikipedia-content .sidebar, .wikipedia-content .sidetable {
             float: right !important;
-            margin-left: 2.5rem !important;
+            margin-left: 3rem !important;
             margin-bottom: 2.5rem !important;
             margin-top: 0.5rem !important;
             padding: 1.5rem 1.25rem !important;
@@ -536,7 +536,7 @@ export const ArticleViewer = ({
             border: 2px solid ${theme.colors.primary}30 !important;
             border-radius: 1.25rem !important;
             box-shadow: 0 2px 12px -2px ${theme.colors.primary}10 !important;
-            margin: 2.5rem 0 !important;
+            margin: 2.5rem 0 2.5rem 2.5rem !important;
             font-size: 1em !important;
             overflow: hidden !important;
           }
