@@ -4,7 +4,7 @@ import { ArticleViewer } from "../components/ArticleViewer";
 import { SearchBar } from "../components/Searchbar";
 import { Sidebar } from "../components/Sidebar";
 import { useToast } from "../hooks/use-toast";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export interface Theme {
 	name: string;
@@ -407,17 +407,6 @@ const Index: React.FC<IndexProps> = ({ initialArticle }) => {
 										Wiki Spark
 									</h1>
 								</div>
-								<Link
-									to="/about"
-									className="px-4 py-2 rounded-lg font-medium transition-all duration-300 hover:scale-105"
-									style={{
-										background: `linear-gradient(135deg, ${currentTheme.colors.primary}15 0%, ${currentTheme.colors.accent}15 100%)`,
-										border: `1px solid ${currentTheme.colors.primary}30`,
-										color: currentTheme.colors.text,
-									}}
-								>
-									About
-								</Link>
 							</div>
 							<div className="flex-1 max-w-2xl ml-12">
 								<SearchBar
