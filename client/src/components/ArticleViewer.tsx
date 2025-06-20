@@ -165,29 +165,28 @@ export const ArticleViewer = ({
 								<img
 									src={article.thumbnail.source}
 									alt={article.title}
-									className="rounded-2xl shadow-2xl w-40 h-40 lg:w-48 lg:h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+									className="rounded-2xl shadow-2xl"
 									style={{
-										border: `3px solid ${theme.colors.primary}30`,
-										boxShadow: `0 20px 40px ${theme.colors.primary}20`,
+										maxWidth: "12rem",
+										maxHeight: "12rem",
+										width: "auto",
+										height: "auto",
+										display: "block",
 									}}
 								/>
-								<div
-									className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-300"
-									style={{ backgroundColor: theme.colors.primary }}
-								></div>
 							</div>
 						</div>
 					)}
 					<div className="flex-1 text-center lg:text-left">
 						<h1
-							className="text-5xl lg:text-6xl font-bold mb-6 leading-tight bg-gradient-to-r from-current to-current bg-clip-text"
+							className="pl-3 text-5xl lg:text-6xl font-bold mb-6 leading-tight bg-gradient-to-r from-current to-current bg-clip-text"
 							style={{ color: theme.colors.text }}
 						>
 							{article.title}
 						</h1>
 						{article.description && (
 							<p
-								className="text-xl lg:text-2xl mb-6 leading-relaxed font-light"
+								className="pl-3 text-xl lg:text-2xl mb-6 leading-relaxed font-light"
 								style={{ color: theme.colors.textSecondary }}
 							>
 								{article.description}
@@ -300,11 +299,12 @@ export const ArticleViewer = ({
             border-bottom: none;
           }
           .wikipedia-content img {
+            display: block !important;
+            margin: 2rem auto !important;
             max-width: 100%;
             height: auto;
             border-radius: 1rem;
-            margin: 2rem 0;
-            box-shadow: 0 10px 25px -5px ${theme.colors.secondary}40;
+            box-shadow: none !important;
             transition: transform 0.3s ease;
           }
           .wikipedia-content img:hover {
