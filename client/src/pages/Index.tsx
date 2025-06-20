@@ -26,6 +26,10 @@ export interface FontSettings {
 	maxWidth: number;
 }
 
+interface IndexProps {
+	initialArticle?: string;
+}
+
 const themes: Theme[] = [
 	{
 		name: "Classic",
@@ -128,8 +132,9 @@ const themes: Theme[] = [
 const THEME_KEY = "wikiViewerTheme";
 const FONT_SETTINGS_KEY = "wikiViewerFontSettings";
 
-const Index = () => {
+const Index: React.FC<IndexProps> = ({ initialArticle }) => {
 	const { title } = useParams();
+	const articleToLoad = initialArticle ?? title ?? "Wikipedia";
 	const navigate = useNavigate();
 	// Load theme from localStorage if available
 	const [currentTheme, setCurrentTheme] = useState<Theme>(() => {
@@ -169,9 +174,8 @@ const Index = () => {
 		navigate(`/wiki/${encodeURIComponent(query)}`);
 	};
 
-	// Fetch article when title param changes
+	// Fetch article when articleToLoad changes
 	useEffect(() => {
-		const articleToLoad = title || "Wikipedia";
 		const fetchArticle = async () => {
 			setIsLoading(true);
 			try {
@@ -194,7 +198,7 @@ const Index = () => {
 		};
 		fetchArticle();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [title]);
+	}, [articleToLoad]);
 
 	// Persist fontSettings to localStorage on change
 	useEffect(() => {
