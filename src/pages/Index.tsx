@@ -249,12 +249,12 @@ const Index = ({ initialArticle }: IndexProps = {}) => {
 						borderColor: `${currentTheme.colors.secondary}20`,
 					}}
 				>
-					<div className="container mx-auto px-6 py-6">
-						<div className="flex items-center justify-between">
-							<div className="flex items-center space-x-6">
+					<div className="container mx-auto px-2 sm:px-6 py-4 sm:py-6">
+						<div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0">
+							<div className="flex items-center space-x-3 w-full sm:w-auto justify-between sm:justify-start">
 								<button
 									onClick={() => setSidebarOpen(true)}
-									className="p-3 rounded-xl hover:scale-105 transition-all duration-200 group"
+									className="p-3 rounded-xl hover:scale-105 transition-all duration-200 group sm:mr-4"
 									style={{
 										background: `linear-gradient(135deg, ${currentTheme.colors.primary}15 0%, ${currentTheme.colors.accent}15 100%)`,
 										border: `1px solid ${currentTheme.colors.primary}30`,
@@ -274,15 +274,15 @@ const Index = ({ initialArticle }: IndexProps = {}) => {
 										/>
 									</svg>
 								</button>
-								<div className="flex items-center space-x-3">
+								<div className="flex items-center space-x-2">
 									<div
-										className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg"
+										className="w-8 h-8 rounded-xl flex items-center justify-center shadow-lg"
 										style={{
 											background: `linear-gradient(135deg, ${currentTheme.colors.primary} 0%, ${currentTheme.colors.accent} 100%)`,
 										}}
 									>
 										<svg
-											className="w-6 h-6 text-white"
+											className="w-5 h-5 text-white"
 											fill="none"
 											viewBox="0 0 24 24"
 											stroke="currentColor"
@@ -291,12 +291,12 @@ const Index = ({ initialArticle }: IndexProps = {}) => {
 												strokeLinecap="round"
 												strokeLinejoin="round"
 												strokeWidth={2}
-												d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+												d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"
 											/>
 										</svg>
 									</div>
 									<h1
-										className="text-3xl font-bold bg-gradient-to-r bg-clip-text text-transparent"
+										className="text-2xl sm:text-3xl font-bold bg-gradient-to-r bg-clip-text text-transparent"
 										style={{
 											backgroundImage: `linear-gradient(135deg, ${currentTheme.colors.primary} 0%, ${currentTheme.colors.accent} 100%)`,
 										}}
@@ -305,18 +305,18 @@ const Index = ({ initialArticle }: IndexProps = {}) => {
 									</h1>
 								</div>
 							</div>
-							<div className="flex-1 max-w-2xl ml-12">
-								<SearchBar
-									onSearch={handleSearch}
-									isLoading={isLoading}
-									theme={currentTheme}
-								/>
-							</div>
+						</div>
+						<div className="w-full sm:flex-1 sm:max-w-2xl sm:ml-12 mt-4 sm:mt-0">
+							<SearchBar
+								onSearch={handleSearch}
+								isLoading={isLoading}
+								theme={currentTheme}
+							/>
 						</div>
 					</div>
 				</header>
 
-				<main className="flex-1 container mx-auto px-6 py-12">
+				<main className="flex-1 container mx-auto px-2 sm:px-6 py-6 sm:py-12">
 					<ArticleViewer
 						article={article}
 						isLoading={isLoading}
@@ -329,7 +329,7 @@ const Index = ({ initialArticle }: IndexProps = {}) => {
 			{/* Persistent Theme Button - Always Visible */}
 			<button
 				onClick={() => setSidebarOpen(true)}
-				className="fixed bottom-8 right-8 z-30 p-4 rounded-full shadow-2xl hover:scale-110 transition-all duration-300 group"
+				className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-30 p-4 rounded-full shadow-2xl hover:scale-110 transition-all duration-300 group"
 				style={{
 					background: `linear-gradient(135deg, ${currentTheme.colors.primary} 0%, ${currentTheme.colors.accent} 100%)`,
 					boxShadow: `0 8px 32px ${currentTheme.colors.primary}40`,
