@@ -1,4 +1,6 @@
 import type { Theme, FontSettings } from "../pages/Index";
+import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface ArticleViewerProps {
 	article: any;
@@ -13,6 +15,48 @@ export const ArticleViewer = ({
 	theme,
 	fontSettings,
 }: ArticleViewerProps) => {
+	const contentRef = useRef<HTMLDivElement>(null);
+	const navigate = useNavigate();
+
+	// Intercept Wikipedia links
+	useEffect(() => {
+		const container = contentRef.current;
+		if (!container) return;
+		const anchors = container.querySelectorAll("a[href]");
+		anchors.forEach((a) => {
+			const anchor = a as HTMLAnchorElement;
+			const href = anchor.getAttribute("href") || "";
+			// Internal Wikipedia links (e.g. /wiki/Article)
+			if (/^\/wiki\//.test(href)) {
+				anchor.onclick = (e: MouseEvent) => {
+					e.preventDefault();
+					const articleTitle = decodeURIComponent(
+						href.replace(/^\/wiki\//, "")
+					);
+					navigate(`/wiki/${encodeURIComponent(articleTitle)}`);
+				};
+				anchor.setAttribute(
+					"href",
+					`/wiki/${decodeURIComponent(href.replace(/^\/wiki\//, ""))}`
+				);
+			}
+			// Full Wikipedia links (e.g. https://en.wikipedia.org/wiki/Article)
+			else if (/^https?:\/\/([a-z]+\.)?wikipedia\.org\/wiki\//.test(href)) {
+				anchor.onclick = (e: MouseEvent) => {
+					e.preventDefault();
+					const articleTitle = decodeURIComponent(
+						href.split("/wiki/")[1] || ""
+					);
+					navigate(`/wiki/${encodeURIComponent(articleTitle)}`);
+				};
+				anchor.setAttribute(
+					"href",
+					`/wiki/${decodeURIComponent(href.split("/wiki/")[1] || "")}`
+				);
+			}
+		});
+	}, [article, navigate]);
+
 	if (isLoading) {
 		return (
 			<div className="flex items-center justify-center py-20">
@@ -548,6 +592,7 @@ export const ArticleViewer = ({
 
 					{article.fullHtmlContent ? (
 						<div
+							ref={contentRef}
 							dangerouslySetInnerHTML={{ __html: article.fullHtmlContent }}
 							style={createWikipediaStyles()}
 						/>
