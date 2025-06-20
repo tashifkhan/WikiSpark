@@ -279,7 +279,7 @@ export const ArticleViewer = ({
 							</p>
 						)}
 						<div
-							className="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-3 sm:space-y-0 sm:space-x-6 text-sm"
+							className="pl-0 lg:pl-3 flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-3 sm:space-y-0 sm:space-x-6 text-sm"
 							style={{ color: theme.colors.textSecondary }}
 						>
 							<div className="flex items-center space-x-2">
