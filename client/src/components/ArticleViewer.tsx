@@ -158,7 +158,7 @@ export const ArticleViewer = ({
 				className="mb-12 pb-10 border-b-2"
 				style={{ borderColor: `${theme.colors.secondary}20` }}
 			>
-				<div className="flex flex-col lg:flex-row items-start lg:items-center space-y-6 lg:space-y-0 lg:space-x-8">
+				<div className="flex flex-col lg:flex-row items-center lg:items-center space-y-6 lg:space-y-0 lg:space-x-8">
 					{article.thumbnail && (
 						<div className="flex-shrink-0 mx-auto lg:mx-0">
 							<div className="relative group">
@@ -179,14 +179,14 @@ export const ArticleViewer = ({
 					)}
 					<div className="flex-1 text-center lg:text-left">
 						<h1
-							className="pl-3 text-5xl lg:text-6xl font-bold mb-6 leading-tight bg-gradient-to-r from-current to-current bg-clip-text"
+							className="pl-0 lg:pl-3 text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight bg-gradient-to-r from-current to-current bg-clip-text"
 							style={{ color: theme.colors.text }}
 						>
 							{article.title}
 						</h1>
 						{article.description && (
 							<p
-								className="pl-3 text-xl lg:text-2xl mb-6 leading-relaxed font-light"
+								className="pl-0 lg:pl-3 text-lg sm:text-xl lg:text-2xl mb-6 leading-relaxed font-light"
 								style={{ color: theme.colors.textSecondary }}
 							>
 								{article.description}
@@ -244,10 +244,10 @@ export const ArticleViewer = ({
 			{/* Article Content */}
 			<div className="wikipedia-content relative">
 				<div
-					className="absolute top-0 left-0 w-1 h-full rounded-full opacity-30"
+					className="absolute top-0 left-0 w-1 h-full rounded-full opacity-30 hidden md:block"
 					style={{ backgroundColor: theme.colors.primary }}
 				></div>
-				<div className="pl-8">
+				<div className="pl-0 md:pl-8">
 					<style>{`
           .wikipedia-content {
             color: ${theme.colors.text};
