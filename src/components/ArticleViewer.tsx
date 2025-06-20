@@ -436,6 +436,89 @@ export const ArticleViewer = ({
           .wikipedia-content .mw-parser-output > p:first-child {
             margin-top: 0;
           }
+          /* Wikipedia message/notice/ambox improvements */
+          .wikipedia-content .ambox, .wikipedia-content .mbox, .wikipedia-content .tmbox, .wikipedia-content .cmbox, .wikipedia-content .fmbox, .wikipedia-content .imbox {
+            background: linear-gradient(135deg, ${theme.colors.surface} 80%, ${theme.colors.background} 100%);
+            color: ${theme.colors.text};
+            border: 1.5px solid ${theme.colors.primary}40;
+            border-radius: 1.25rem;
+            box-shadow: 0 2px 12px -2px ${theme.colors.primary}10;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            font-size: 1.1em;
+            font-weight: 500;
+            opacity: 0.98;
+            filter: none;
+          }
+          .wikipedia-content .ambox a, .wikipedia-content .mbox a, .wikipedia-content .tmbox a, .wikipedia-content .cmbox a, .wikipedia-content .fmbox a, .wikipedia-content .imbox a {
+            color: ${theme.colors.primary};
+            text-decoration: underline;
+            font-weight: 600;
+          }
+          .wikipedia-content .ambox .ambox-image img {
+            margin: 0 1.5rem 0 0;
+            max-width: 48px;
+            max-height: 48px;
+            vertical-align: middle;
+          }
+          .wikipedia-content .ambox .ambox-text {
+            color: ${theme.colors.text};
+            font-size: 1em;
+            font-weight: 400;
+          }
+          /* End Wikipedia message/notice/ambox improvements */
+
+          /* Wikipedia navbox, infobox, and metadata table improvements */
+          .wikipedia-content .navbox, .wikipedia-content .vertical-navbox, .wikipedia-content .metadata, .wikipedia-content .infobox {
+            background: linear-gradient(135deg, ${theme.colors.surface} 90%, ${theme.colors.background} 100%);
+            color: ${theme.colors.text};
+            border: 2px solid ${theme.colors.primary}30;
+            border-radius: 1.25rem;
+            box-shadow: 0 2px 12px -2px ${theme.colors.primary}10;
+            margin: 2.5rem 0;
+            font-size: 1em;
+            overflow: hidden;
+          }
+          .wikipedia-content .navbox th, .wikipedia-content .vertical-navbox th, .wikipedia-content .infobox th {
+            background: ${theme.colors.primary}10;
+            color: ${theme.colors.primary};
+            font-weight: 700;
+            border-bottom: 1.5px solid ${theme.colors.primary}20;
+            padding: 0.75em 1em;
+            text-align: left;
+          }
+          .wikipedia-content .navbox td, .wikipedia-content .vertical-navbox td, .wikipedia-content .infobox td {
+            background: transparent;
+            color: ${theme.colors.text};
+            border-bottom: 1px solid ${theme.colors.secondary}20;
+            padding: 0.75em 1em;
+          }
+          .wikipedia-content .navbox tr:last-child td, .wikipedia-content .vertical-navbox tr:last-child td, .wikipedia-content .infobox tr:last-child td {
+            border-bottom: none;
+          }
+          .wikipedia-content .navbox a, .wikipedia-content .vertical-navbox a, .wikipedia-content .infobox a {
+            color: ${theme.colors.primary};
+            text-decoration: underline;
+            font-weight: 500;
+          }
+          .wikipedia-content .navbox .navbox-title, .wikipedia-content .vertical-navbox .navbox-title {
+            background: ${theme.colors.primary}15;
+            color: ${theme.colors.primary};
+            font-size: 1.1em;
+            font-weight: 700;
+            padding: 1em;
+            border-bottom: 2px solid ${theme.colors.primary}30;
+          }
+          .wikipedia-content .metadata {
+            font-size: 0.95em;
+            color: ${theme.colors.textSecondary};
+            background: ${theme.colors.surface}CC;
+            border: 1px dashed ${theme.colors.secondary}40;
+            border-radius: 0.75rem;
+            margin: 1.5rem 0;
+            padding: 0.75em 1em;
+          }
+          /* End Wikipedia navbox, infobox, and metadata table improvements */
         `}</style>
 
 					{article.fullHtmlContent ? (
