@@ -92,6 +92,18 @@ const themes: Theme[] = [
 		},
 	},
 	{
+		name: "Aqua",
+		colors: {
+			primary: "#22d3ee",
+			secondary: "#06b6d4",
+			background: "#0c1821",
+			surface: "#164e63",
+			text: "#e0f7fa",
+			textSecondary: "#67e8f9",
+			accent: "#06b6d4",
+		},
+	},
+	{
 		name: "Forest",
 		colors: {
 			primary: "#22c55e",
