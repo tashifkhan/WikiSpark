@@ -128,13 +128,36 @@ const themes: Theme[] = [
 	},
 ];
 
+const THEME_KEY = "wikiViewerTheme";
+const FONT_SETTINGS_KEY = "wikiViewerFontSettings";
+
 const Index = ({ initialArticle }: IndexProps = {}) => {
-	const [currentTheme, setCurrentTheme] = useState<Theme>(themes[0]);
-	const [fontSettings, setFontSettings] = useState<FontSettings>({
-		family: "serif",
-		size: 18,
-		lineHeight: 1.7,
-		maxWidth: 1000,
+	// Load theme from localStorage if available
+	const [currentTheme, setCurrentTheme] = useState<Theme>(() => {
+		const stored = localStorage.getItem(THEME_KEY);
+		if (stored) {
+			try {
+				const parsed = JSON.parse(stored);
+				// Find theme by name to ensure reference equality
+				const found = themes.find((t) => t.name === parsed.name);
+				return found || themes[0];
+			} catch {}
+		}
+		return themes[0];
+	});
+	const [fontSettings, setFontSettings] = useState<FontSettings>(() => {
+		const stored = localStorage.getItem(FONT_SETTINGS_KEY);
+		if (stored) {
+			try {
+				return JSON.parse(stored);
+			} catch {}
+		}
+		return {
+			family: "serif",
+			size: 18,
+			lineHeight: 1.7,
+			maxWidth: 1000,
+		};
 	});
 	const [article, setArticle] = useState<any>(null);
 	const [isLoading, setIsLoading] = useState(false);
@@ -169,6 +192,16 @@ const Index = ({ initialArticle }: IndexProps = {}) => {
 		const articleToLoad = initialArticle || "Wikipedia";
 		handleSearch(articleToLoad);
 	}, [initialArticle]);
+
+	// Persist fontSettings to localStorage on change
+	useEffect(() => {
+		localStorage.setItem(FONT_SETTINGS_KEY, JSON.stringify(fontSettings));
+	}, [fontSettings]);
+
+	// Persist currentTheme to localStorage on change
+	useEffect(() => {
+		localStorage.setItem(THEME_KEY, JSON.stringify(currentTheme));
+	}, [currentTheme]);
 
 	const themeStyles = {
 		"--theme-primary": currentTheme.colors.primary,
