@@ -70,13 +70,13 @@ export const themes: Theme[] = [
 	{
 		name: "Dark O",
 		colors: {
-			primary: "#fb923c",
-			secondary: "#ea580c",
-			background: "#1c1917",
-			surface: "#292524",
-			text: "#fef3c7",
-			textSecondary: "#fcd34d",
-			accent: "#f59e0b",
+			primary: "#ff8c42",
+			secondary: "#d97706",
+			background: "#0f0e0d",
+			surface: "#1f1d1a",
+			text: "#fef7ed",
+			textSecondary: "#fed7aa",
+			accent: "#fb923c",
 		},
 	},
 	{
