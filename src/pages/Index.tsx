@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { WikipediaService } from "..//services/wikipediaService";
 import { ArticleViewer } from "../components/ArticleViewer";
-import { ThemeControls } from "../components/ThemeControl";
 import { SearchBar } from "../components/Searchbar";
 import { Sidebar } from "../components/Sidebar";
 import { useToast } from "../hooks/use-toast";

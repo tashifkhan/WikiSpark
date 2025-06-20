@@ -104,7 +104,7 @@ export const ArticleViewer = ({
 
 	return (
 		<article
-			className={`mx-auto transition-all duration-300 ${fontFamilyClass}`}
+			className={`mx-auto transition-all duration-300 ${fontFamilyClass} px-6 lg:px-8`}
 			style={{
 				maxWidth: `${fontSettings.maxWidth}px`,
 			}}
@@ -166,6 +166,7 @@ export const ArticleViewer = ({
             color: ${theme.colors.text};
             font-size: ${fontSettings.size}px;
             line-height: ${fontSettings.lineHeight};
+            text-align: justify;
           }
           .wikipedia-content a {
             color: ${theme.colors.primary};
@@ -227,6 +228,7 @@ export const ArticleViewer = ({
           }
           .wikipedia-content p {
             margin: 1rem 0;
+            text-align: justify;
           }
           .wikipedia-content ul,
           .wikipedia-content ol {
