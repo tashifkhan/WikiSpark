@@ -1,10 +1,12 @@
-@import "tailwindcss";
-
 /* Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
 
 /* OpenDyslexic Font - Using Google Fonts proxy */
 @import url('https://fonts.googleapis.com/css2?family=OpenDyslexic:wght@400;700&display=swap');
+
+
+@import "tailwindcss";
+
 
 /* Fallback OpenDyslexic Font using jsDelivr CDN */
 @font-face {

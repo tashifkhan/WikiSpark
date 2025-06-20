@@ -328,7 +328,7 @@ export const Sidebar = ({
 						<input
 							type="range"
 							min="600"
-							max="1200"
+							max={window.innerWidth}
 							step="50"
 							value={fontSettings.maxWidth}
 							onChange={(e) =>

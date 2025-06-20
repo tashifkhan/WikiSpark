@@ -112,7 +112,7 @@ const WikipediaPage = () => {
 		family: "serif",
 		size: 18,
 		lineHeight: 1.7,
-		maxWidth: 800,
+		maxWidth: 1000,
 	});
 	const [article, setArticle] = useState<any>(null);
 	const [isLoading, setIsLoading] = useState(false);
