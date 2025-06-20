@@ -252,12 +252,80 @@ const Index = () => {
 						borderColor: `${currentTheme.colors.secondary}20`,
 					}}
 				>
-					<div className="container mx-auto px-2 sm:px-6 py-4 sm:py-6">
-						<div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0">
-							<div className="flex items-center space-x-3 w-full md:w-auto justify-between md:justify-start">
+					<div className="container mx-auto px-4 sm:px-6 py-4 sm:py-6">
+						{/* Mobile Layout - Stacked */}
+						<div className="flex flex-col gap-4 md:hidden">
+							<div className="flex items-center justify-between">
+								<div className="flex items-center space-x-3">
+									<button
+										onClick={() => setSidebarOpen(true)}
+										className="p-3 rounded-xl hover:scale-105 transition-all duration-200 group"
+										style={{
+											background: `linear-gradient(135deg, ${currentTheme.colors.primary}15 0%, ${currentTheme.colors.accent}15 100%)`,
+											border: `1px solid ${currentTheme.colors.primary}30`,
+										}}
+									>
+										<svg
+											className="w-6 h-6 transition-transform group-hover:rotate-180 duration-300"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor"
+										>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												strokeWidth={2}
+												d="M4 6h16M4 12h16M4 18h16"
+											/>
+										</svg>
+									</button>
+									<div className="flex items-center space-x-2">
+										<div
+											className="w-8 h-8 rounded-xl flex items-center justify-center shadow-lg"
+											style={{
+												background: `linear-gradient(135deg, ${currentTheme.colors.primary} 0%, ${currentTheme.colors.accent} 100%)`,
+											}}
+										>
+											<svg
+												className="w-5 h-5 text-white"
+												fill="none"
+												viewBox="0 0 24 24"
+												stroke="currentColor"
+											>
+												<path
+													strokeLinecap="round"
+													strokeLinejoin="round"
+													strokeWidth={2}
+													d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"
+												/>
+											</svg>
+										</div>
+										<h1
+											className="text-2xl font-bold bg-gradient-to-r bg-clip-text text-transparent"
+											style={{
+												backgroundImage: `linear-gradient(135deg, ${currentTheme.colors.primary} 0%, ${currentTheme.colors.accent} 100%)`,
+											}}
+										>
+											WikiViewer
+										</h1>
+									</div>
+								</div>
+							</div>
+							<div className="w-full">
+								<SearchBar
+									onSearch={handleSearch}
+									isLoading={isLoading}
+									theme={currentTheme}
+								/>
+							</div>
+						</div>
+
+						{/* Desktop Layout - Side by Side */}
+						<div className="hidden md:flex items-center justify-between">
+							<div className="flex items-center space-x-6">
 								<button
 									onClick={() => setSidebarOpen(true)}
-									className="p-3 rounded-xl hover:scale-105 transition-all duration-200 group sm:mr-4"
+									className="p-3 rounded-xl hover:scale-105 transition-all duration-200 group"
 									style={{
 										background: `linear-gradient(135deg, ${currentTheme.colors.primary}15 0%, ${currentTheme.colors.accent}15 100%)`,
 										border: `1px solid ${currentTheme.colors.primary}30`,
@@ -277,15 +345,15 @@ const Index = () => {
 										/>
 									</svg>
 								</button>
-								<div className="flex items-center space-x-2">
+								<div className="flex items-center space-x-3">
 									<div
-										className="w-8 h-8 rounded-xl flex items-center justify-center shadow-lg"
+										className="w-10 h-10 rounded-xl flex items-center justify-center shadow-lg"
 										style={{
 											background: `linear-gradient(135deg, ${currentTheme.colors.primary} 0%, ${currentTheme.colors.accent} 100%)`,
 										}}
 									>
 										<svg
-											className="w-5 h-5 text-white"
+											className="w-6 h-6 text-white"
 											fill="none"
 											viewBox="0 0 24 24"
 											stroke="currentColor"
@@ -294,12 +362,12 @@ const Index = () => {
 												strokeLinecap="round"
 												strokeLinejoin="round"
 												strokeWidth={2}
-												d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"
+												d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
 											/>
 										</svg>
 									</div>
 									<h1
-										className="text-2xl sm:text-3xl font-bold bg-gradient-to-r bg-clip-text text-transparent"
+										className="text-3xl font-bold bg-gradient-to-r bg-clip-text text-transparent"
 										style={{
 											backgroundImage: `linear-gradient(135deg, ${currentTheme.colors.primary} 0%, ${currentTheme.colors.accent} 100%)`,
 										}}
@@ -308,13 +376,13 @@ const Index = () => {
 									</h1>
 								</div>
 							</div>
-						</div>
-						<div className="w-full md:flex-1 md:max-w-2xl md:ml-12 mt-4 md:mt-0">
-							<SearchBar
-								onSearch={handleSearch}
-								isLoading={isLoading}
-								theme={currentTheme}
-							/>
+							<div className="flex-1 max-w-2xl ml-12">
+								<SearchBar
+									onSearch={handleSearch}
+									isLoading={isLoading}
+									theme={currentTheme}
+								/>
+							</div>
 						</div>
 					</div>
 				</header>
