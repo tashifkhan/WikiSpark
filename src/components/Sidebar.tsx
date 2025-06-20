@@ -24,7 +24,8 @@ export const Sidebar = ({
 			{/* Backdrop */}
 			{isOpen && (
 				<div
-					className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm z-40 transition-all duration-300"
+					className="fixed inset-0 backdrop-blur-sm z-40 transition-all duration-300"
+					style={{ backgroundColor: "rgba(0, 0, 0, 0.6)" }}
 					onClick={onClose}
 				/>
 			)}
