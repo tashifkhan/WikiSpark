@@ -34,6 +34,18 @@ const themes: Theme[] = [
 	{
 		name: "Classic",
 		colors: {
+			primary: "#d97706",
+			secondary: "#92400e",
+			background: "#fefcf9",
+			surface: "#fef5e7",
+			text: "#78350f",
+			textSecondary: "#a16207",
+			accent: "#f59e0b",
+		},
+	},
+	{
+		name: "Blue",
+		colors: {
 			primary: "#3b82f6",
 			secondary: "#64748b",
 			background: "#ffffff",
@@ -53,6 +65,18 @@ const themes: Theme[] = [
 			text: "#f1f5f9",
 			textSecondary: "#94a3b8",
 			accent: "#60a5fa",
+		},
+	},
+	{
+		name: "Dark O",
+		colors: {
+			primary: "#fb923c",
+			secondary: "#ea580c",
+			background: "#1c1917",
+			surface: "#292524",
+			text: "#fef3c7",
+			textSecondary: "#fcd34d",
+			accent: "#f59e0b",
 		},
 	},
 	{
