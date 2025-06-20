@@ -306,7 +306,7 @@ const Index = () => {
 												backgroundImage: `linear-gradient(135deg, ${currentTheme.colors.primary} 0%, ${currentTheme.colors.accent} 100%)`,
 											}}
 										>
-											WikiViewer
+											Wiki Spark
 										</h1>
 									</div>
 								</div>
@@ -372,7 +372,7 @@ const Index = () => {
 											backgroundImage: `linear-gradient(135deg, ${currentTheme.colors.primary} 0%, ${currentTheme.colors.accent} 100%)`,
 										}}
 									>
-										WikiViewer
+										Wiki Spark
 									</h1>
 								</div>
 							</div>
