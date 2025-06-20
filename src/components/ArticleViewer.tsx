@@ -340,36 +340,50 @@ export const ArticleViewer = ({
             color: ${theme.colors.primary};
             font-weight: 600;
           }
-          .wikipedia-content .infobox {
-            float: right;
-            margin: 0 0 2rem 2rem;
-            width: 320px;
-            background: linear-gradient(135deg, ${theme.colors.surface} 0%, ${theme.colors.primary}08 100%);
-            border: 1px solid ${theme.colors.secondary}20;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            box-shadow: 0 8px 25px -5px ${theme.colors.secondary}30;
-            clear: right;
+          .wikipedia-content .infobox, .wikipedia-content .sidebox, .wikipedia-content .sidebar, .wikipedia-content .sidetable {
+            float: right !important;
+            margin-left: 2.5rem !important;
+            margin-bottom: 2.5rem !important;
+            margin-top: 0.5rem !important;
+            padding: 1.5rem 1.25rem !important;
+            background: ${theme.colors.surface} !important;
+            color: ${theme.colors.text} !important;
+            border: 2px solid ${theme.colors.primary}30 !important;
+            border-radius: 1.25rem !important;
+            box-shadow: 0 4px 24px -4px ${theme.colors.primary}15 !important;
+            min-width: 280px !important;
+            max-width: 350px !important;
+            width: auto !important;
+            clear: right !important;
+            display: table !important;
           }
-          .wikipedia-content .infobox table {
-            margin: 0;
-            border: none;
-            box-shadow: none;
-            background: transparent;
+          .wikipedia-content .infobox caption, .wikipedia-content .sidebox caption, .wikipedia-content .sidebar caption, .wikipedia-content .sidetable caption {
+            color: ${theme.colors.primary} !important;
+            font-weight: 700 !important;
+            font-size: 1.1em !important;
+            padding-bottom: 0.5em !important;
           }
-          .wikipedia-content .infobox th,
-          .wikipedia-content .infobox td {
-            padding: 0.5rem;
-            border: none;
-            border-bottom: 1px solid ${theme.colors.secondary}15;
+          .wikipedia-content .infobox th, .wikipedia-content .sidebox th, .wikipedia-content .sidebar th, .wikipedia-content .sidetable th {
+            background: ${theme.colors.surface} !important;
+            color: ${theme.colors.primary} !important;
+            font-weight: 700 !important;
+            border-bottom: 1.5px solid ${theme.colors.primary}20 !important;
+            padding: 0.75em 1em !important;
+            text-align: left !important;
           }
-          .wikipedia-content .infobox th {
-            background: ${theme.colors.primary}10;
-            font-size: 0.875em;
-            font-weight: 700;
+          .wikipedia-content .infobox td, .wikipedia-content .sidebox td, .wikipedia-content .sidebar td, .wikipedia-content .sidetable td {
+            background: ${theme.colors.surface} !important;
+            color: ${theme.colors.text} !important;
+            border-bottom: 1px solid ${theme.colors.secondary}20 !important;
+            padding: 0.75em 1em !important;
           }
-          .wikipedia-content .infobox td {
-            font-size: 0.875em;
+          .wikipedia-content .infobox tr, .wikipedia-content .sidebox tr, .wikipedia-content .sidebar tr, .wikipedia-content .sidetable tr {
+            background: ${theme.colors.surface} !important;
+          }
+          .wikipedia-content .infobox a, .wikipedia-content .sidebox a, .wikipedia-content .sidebar a, .wikipedia-content .sidetable a {
+            color: ${theme.colors.primary} !important;
+            text-decoration: underline !important;
+            font-weight: 500 !important;
           }
           .wikipedia-content .thumbinner {
             background: linear-gradient(135deg, ${theme.colors.surface} 0%, ${theme.colors.primary}05 100%);
@@ -409,10 +423,13 @@ export const ArticleViewer = ({
           
           /* Mobile responsive styles */
           @media (max-width: 768px) {
-            .wikipedia-content .infobox {
-              float: none;
-              width: 100%;
-              margin: 2rem 0;
+            .wikipedia-content .infobox, .wikipedia-content .sidebox, .wikipedia-content .sidebar, .wikipedia-content .sidetable {
+              float: none !important;
+              margin-left: 0 !important;
+              margin-right: 0 !important;
+              max-width: 100% !important;
+              width: 100% !important;
+              display: block !important;
             }
             .wikipedia-content table {
               font-size: 0.875em;
@@ -470,55 +487,63 @@ export const ArticleViewer = ({
 
           /* Wikipedia navbox, infobox, and metadata table improvements */
           .wikipedia-content .navbox, .wikipedia-content .vertical-navbox, .wikipedia-content .metadata, .wikipedia-content .infobox {
-            background: linear-gradient(135deg, ${theme.colors.surface} 90%, ${theme.colors.background} 100%);
-            color: ${theme.colors.text};
-            border: 2px solid ${theme.colors.primary}30;
-            border-radius: 1.25rem;
-            box-shadow: 0 2px 12px -2px ${theme.colors.primary}10;
-            margin: 2.5rem 0;
-            font-size: 1em;
-            overflow: hidden;
+            background: ${theme.colors.surface} !important;
+            color: ${theme.colors.text} !important;
+            border: 2px solid ${theme.colors.primary}30 !important;
+            border-radius: 1.25rem !important;
+            box-shadow: 0 2px 12px -2px ${theme.colors.primary}10 !important;
+            margin: 2.5rem 0 !important;
+            font-size: 1em !important;
+            overflow: hidden !important;
           }
           .wikipedia-content .navbox th, .wikipedia-content .vertical-navbox th, .wikipedia-content .infobox th {
-            background: ${theme.colors.primary}10;
-            color: ${theme.colors.primary};
-            font-weight: 700;
-            border-bottom: 1.5px solid ${theme.colors.primary}20;
-            padding: 0.75em 1em;
-            text-align: left;
+            background: ${theme.colors.surface} !important;
+            color: ${theme.colors.primary} !important;
+            font-weight: 700 !important;
+            border-bottom: 1.5px solid ${theme.colors.primary}20 !important;
+            padding: 0.75em 1em !important;
+            text-align: left !important;
           }
           .wikipedia-content .navbox td, .wikipedia-content .vertical-navbox td, .wikipedia-content .infobox td {
-            background: transparent;
-            color: ${theme.colors.text};
-            border-bottom: 1px solid ${theme.colors.secondary}20;
-            padding: 0.75em 1em;
+            background: ${theme.colors.surface} !important;
+            color: ${theme.colors.text} !important;
+            border-bottom: 1px solid ${theme.colors.secondary}20 !important;
+            padding: 0.75em 1em !important;
           }
-          .wikipedia-content .navbox tr:last-child td, .wikipedia-content .vertical-navbox tr:last-child td, .wikipedia-content .infobox tr:last-child td {
-            border-bottom: none;
+          .wikipedia-content .navbox tr, .wikipedia-content .vertical-navbox tr, .wikipedia-content .infobox tr {
+            background: ${theme.colors.surface} !important;
           }
           .wikipedia-content .navbox a, .wikipedia-content .vertical-navbox a, .wikipedia-content .infobox a {
-            color: ${theme.colors.primary};
-            text-decoration: underline;
-            font-weight: 500;
+            color: ${theme.colors.primary} !important;
+            text-decoration: underline !important;
+            font-weight: 500 !important;
           }
           .wikipedia-content .navbox .navbox-title, .wikipedia-content .vertical-navbox .navbox-title {
-            background: ${theme.colors.primary}15;
-            color: ${theme.colors.primary};
-            font-size: 1.1em;
-            font-weight: 700;
-            padding: 1em;
-            border-bottom: 2px solid ${theme.colors.primary}30;
+            background: ${theme.colors.primary}15 !important;
+            color: ${theme.colors.primary} !important;
+            font-size: 1.1em !important;
+            font-weight: 700 !important;
+            padding: 1em !important;
+            border-bottom: 2px solid ${theme.colors.primary}30 !important;
           }
           .wikipedia-content .metadata {
-            font-size: 0.95em;
-            color: ${theme.colors.textSecondary};
-            background: ${theme.colors.surface}CC;
-            border: 1px dashed ${theme.colors.secondary}40;
-            border-radius: 0.75rem;
-            margin: 1.5rem 0;
-            padding: 0.75em 1em;
+            font-size: 0.95em !important;
+            color: ${theme.colors.textSecondary} !important;
+            background: ${theme.colors.surface}CC !important;
+            border: 1px dashed ${theme.colors.secondary}40 !important;
+            border-radius: 0.75rem !important;
+            margin: 1.5rem 0 !important;
+            padding: 0.75em 1em !important;
           }
-          /* End Wikipedia navbox, infobox, and metadata table improvements */
+          /* Remove Wikipedia's inline background colors for navbox/infobox */
+          .wikipedia-content .navbox [style*="background"],
+          .wikipedia-content .vertical-navbox [style*="background"],
+          .wikipedia-content .infobox [style*="background"] {
+            background: unset !important;
+            background-color: unset !important;
+            color: ${theme.colors.text} !important;
+          }
+          /* End navbox/infobox table overrides */
         `}</style>
 
 					{article.fullHtmlContent ? (
