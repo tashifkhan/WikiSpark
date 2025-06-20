@@ -4,6 +4,7 @@ import { ArticleViewer } from "../components/ArticleViewer";
 import { SearchBar } from "../components/Searchbar";
 import { Sidebar } from "../components/Sidebar";
 import { useToast } from "../hooks/use-toast";
+import { useNavigate, useParams } from "react-router-dom";
 
 export interface Theme {
 	name: string;
@@ -23,10 +24,6 @@ export interface FontSettings {
 	size: number;
 	lineHeight: number;
 	maxWidth: number;
-}
-
-interface IndexProps {
-	initialArticle?: string;
 }
 
 const themes: Theme[] = [
@@ -131,7 +128,9 @@ const themes: Theme[] = [
 const THEME_KEY = "wikiViewerTheme";
 const FONT_SETTINGS_KEY = "wikiViewerFontSettings";
 
-const Index = ({ initialArticle }: IndexProps = {}) => {
+const Index = () => {
+	const { title } = useParams();
+	const navigate = useNavigate();
 	// Load theme from localStorage if available
 	const [currentTheme, setCurrentTheme] = useState<Theme>(() => {
 		const stored = localStorage.getItem(THEME_KEY);
@@ -166,32 +165,36 @@ const Index = ({ initialArticle }: IndexProps = {}) => {
 
 	const handleSearch = async (query: string) => {
 		if (!query.trim()) return;
-
-		setIsLoading(true);
-		try {
-			const articleData = await WikipediaService.fetchArticle(query);
-			setArticle(articleData);
-			toast({
-				title: "Article loaded",
-				description: `Successfully loaded "${articleData.title}"`,
-			});
-		} catch (error) {
-			console.error("Error fetching article:", error);
-			toast({
-				title: "Error",
-				description: "Failed to fetch the article. Please try again.",
-				variant: "destructive",
-			});
-		} finally {
-			setIsLoading(false);
-		}
+		// Only update the URL, let the effect handle fetching
+		navigate(`/wiki/${encodeURIComponent(query)}`);
 	};
 
-	// Load initial article
+	// Fetch article when title param changes
 	useEffect(() => {
-		const articleToLoad = initialArticle || "Wikipedia";
-		handleSearch(articleToLoad);
-	}, [initialArticle]);
+		const articleToLoad = title || "Wikipedia";
+		const fetchArticle = async () => {
+			setIsLoading(true);
+			try {
+				const articleData = await WikipediaService.fetchArticle(articleToLoad);
+				setArticle(articleData);
+				toast({
+					title: "Article loaded",
+					description: `Successfully loaded "${articleData.title}"`,
+				});
+			} catch (error) {
+				console.error("Error fetching article:", error);
+				toast({
+					title: "Error",
+					description: "Failed to fetch the article. Please try again.",
+					variant: "destructive",
+				});
+			} finally {
+				setIsLoading(false);
+			}
+		};
+		fetchArticle();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [title]);
 
 	// Persist fontSettings to localStorage on change
 	useEffect(() => {
@@ -250,8 +253,8 @@ const Index = ({ initialArticle }: IndexProps = {}) => {
 					}}
 				>
 					<div className="container mx-auto px-2 sm:px-6 py-4 sm:py-6">
-						<div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0">
-							<div className="flex items-center space-x-3 w-full sm:w-auto justify-between sm:justify-start">
+						<div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0">
+							<div className="flex items-center space-x-3 w-full md:w-auto justify-between md:justify-start">
 								<button
 									onClick={() => setSidebarOpen(true)}
 									className="p-3 rounded-xl hover:scale-105 transition-all duration-200 group sm:mr-4"
@@ -306,7 +309,7 @@ const Index = ({ initialArticle }: IndexProps = {}) => {
 								</div>
 							</div>
 						</div>
-						<div className="w-full sm:flex-1 sm:max-w-2xl sm:ml-12 mt-4 sm:mt-0">
+						<div className="w-full md:flex-1 md:max-w-2xl md:ml-12 mt-4 md:mt-0">
 							<SearchBar
 								onSearch={handleSearch}
 								isLoading={isLoading}
