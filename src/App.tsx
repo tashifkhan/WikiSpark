@@ -1,14 +1,12 @@
-import React from 'react';
+import React from "react";
+import "./App.css";
 
 function App() {
-
-  return (
-    <>
-      <p className="read-the-docs">
-        starting
-      </p>
-    </>
-  )
+	return (
+		<>
+			<p className="read-the-docs">starting</p>
+		</>
+	);
 }
 
-export default App
+export default App;
