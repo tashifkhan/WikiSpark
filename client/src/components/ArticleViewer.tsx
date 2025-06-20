@@ -18,6 +18,43 @@ export const ArticleViewer = ({
 	const contentRef = useRef<HTMLDivElement>(null);
 	const navigate = useNavigate();
 
+	// Check if a title should redirect to Wikipedia instead of being displayed
+	const shouldRedirectToWikipedia = (title: string) => {
+		// Check for non-article namespaces that should redirect to Wikipedia
+		const nonArticleNamespaces = [
+			"File:",
+			"Image:",
+			"Media:",
+			"Category:",
+			"Template:",
+			"Help:",
+			"Portal:",
+			"User:",
+			"Wikipedia:",
+			"Special:",
+			"Talk:",
+			"User_talk:",
+			"Wikipedia_talk:",
+			"File_talk:",
+			"MediaWiki:",
+			"MediaWiki_talk:",
+			"Template_talk:",
+			"Help_talk:",
+			"Category_talk:",
+			"Portal_talk:",
+			"Module:",
+			"Module_talk:",
+			"TimedText:",
+			"TimedText_talk:",
+		];
+
+		return nonArticleNamespaces.some(
+			(namespace) =>
+				title.startsWith(namespace) ||
+				title.includes(":" + namespace.replace(":", ""))
+		);
+	};
+
 	// Intercept Wikipedia links
 	useEffect(() => {
 		const container = contentRef.current;
@@ -26,33 +63,82 @@ export const ArticleViewer = ({
 		anchors.forEach((a) => {
 			const anchor = a as HTMLAnchorElement;
 			const href = anchor.getAttribute("href") || "";
+
 			// Internal Wikipedia links (e.g. /wiki/Article)
 			if (/^\/wiki\//.test(href)) {
-				anchor.onclick = (e: MouseEvent) => {
-					e.preventDefault();
-					const articleTitle = decodeURIComponent(
-						href.replace(/^\/wiki\//, "")
+				const articleTitle = decodeURIComponent(href.replace(/^\/wiki\//, ""));
+
+				// Check if this should redirect to Wikipedia
+				if (shouldRedirectToWikipedia(articleTitle)) {
+					anchor.onclick = (e: MouseEvent) => {
+						e.preventDefault();
+						window.open(
+							`https://en.wikipedia.org/wiki/${encodeURIComponent(
+								articleTitle
+							)}`,
+							"_blank"
+						);
+					};
+					anchor.setAttribute(
+						"href",
+						`https://en.wikipedia.org/wiki/${encodeURIComponent(articleTitle)}`
 					);
-					navigate(`/wiki/${encodeURIComponent(articleTitle)}`);
-				};
-				anchor.setAttribute(
-					"href",
-					`/wiki/${decodeURIComponent(href.replace(/^\/wiki\//, ""))}`
-				);
+					anchor.setAttribute("target", "_blank");
+					anchor.setAttribute("rel", "noopener noreferrer");
+				} else {
+					anchor.onclick = (e: MouseEvent) => {
+						e.preventDefault();
+						navigate(`/wiki/${encodeURIComponent(articleTitle)}`);
+					};
+					anchor.setAttribute(
+						"href",
+						`/wiki/${encodeURIComponent(articleTitle)}`
+					);
+				}
 			}
 			// Full Wikipedia links (e.g. https://en.wikipedia.org/wiki/Article)
 			else if (/^https?:\/\/([a-z]+\.)?wikipedia\.org\/wiki\//.test(href)) {
+				const articleTitle = decodeURIComponent(href.split("/wiki/")[1] || "");
+
+				// Check if this should redirect to Wikipedia
+				if (shouldRedirectToWikipedia(articleTitle)) {
+					anchor.onclick = (e: MouseEvent) => {
+						e.preventDefault();
+						window.open(href, "_blank");
+					};
+					anchor.setAttribute("target", "_blank");
+					anchor.setAttribute("rel", "noopener noreferrer");
+				} else {
+					anchor.onclick = (e: MouseEvent) => {
+						e.preventDefault();
+						navigate(`/wiki/${encodeURIComponent(articleTitle)}`);
+					};
+					anchor.setAttribute(
+						"href",
+						`/wiki/${encodeURIComponent(articleTitle)}`
+					);
+				}
+			}
+			// Handle other Wikipedia URLs (like images, files, etc.)
+			else if (/^https?:\/\/([a-z]+\.)?wikipedia\.org/.test(href)) {
 				anchor.onclick = (e: MouseEvent) => {
 					e.preventDefault();
-					const articleTitle = decodeURIComponent(
-						href.split("/wiki/")[1] || ""
-					);
-					navigate(`/wiki/${encodeURIComponent(articleTitle)}`);
+					window.open(href, "_blank");
 				};
-				anchor.setAttribute(
-					"href",
-					`/wiki/${decodeURIComponent(href.split("/wiki/")[1] || "")}`
-				);
+				anchor.setAttribute("target", "_blank");
+				anchor.setAttribute("rel", "noopener noreferrer");
+			}
+			// Handle Wikimedia Commons and other Wikimedia URLs
+			else if (
+				/^https?:\/\/commons\.wikimedia\.org/.test(href) ||
+				/^https?:\/\/upload\.wikimedia\.org/.test(href)
+			) {
+				anchor.onclick = (e: MouseEvent) => {
+					e.preventDefault();
+					window.open(href, "_blank");
+				};
+				anchor.setAttribute("target", "_blank");
+				anchor.setAttribute("rel", "noopener noreferrer");
 			}
 		});
 	}, [article, navigate]);

@@ -34,19 +34,41 @@
     return null;
   }
 
+  function shouldRedirectToWikipedia(pageId) {
+    if (!pageId) return true;
+    
+    // Check if this is non-article content that should stay on Wikipedia
+    const nonArticleNamespaces = [
+      'File:', 'Image:', 'Media:', 'Category:', 'Template:', 'Help:', 
+      'Portal:', 'User:', 'Wikipedia:', 'Special:', 'Talk:', 'User_talk:', 
+      'Wikipedia_talk:', 'File_talk:', 'MediaWiki:', 'MediaWiki_talk:',
+      'Template_talk:', 'Help_talk:', 'Category_talk:', 'Portal_talk:',
+      'Module:', 'Module_talk:', 'TimedText:', 'TimedText_talk:'
+    ];
+    
+    return nonArticleNamespaces.some(namespace => 
+      pageId.startsWith(namespace) || pageId.includes(':' + namespace.replace(':', ''))
+    );
+  }
+
   function handleClick(event) {
     const target = event.target.closest('a');
     if (!target || !target.href) return;
 
     if (isWikipediaUrl(target.href)) {
+      const pageId = extractPageId(target.href);
+      
+      // If it's non-article content or we can't extract page ID, let it go to Wikipedia
+      if (!pageId || shouldRedirectToWikipedia(pageId)) {
+        return; // Let the normal Wikipedia link work
+      }
+      
+      // Only redirect article content to WikiSpark
       event.preventDefault();
       event.stopPropagation();
       
-      const pageId = extractPageId(target.href);
-      if (pageId) {
-        const wikiSparkUrl = `https://wikispark.tashif.codes/wiki/${pageId}`;
-        window.location.href = wikiSparkUrl;
-      }
+      const wikiSparkUrl = `https://wikispark.tashif.codes/wiki/${encodeURIComponent(pageId)}`;
+      window.location.href = wikiSparkUrl;
     }
   }
 

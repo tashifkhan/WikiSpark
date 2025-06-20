@@ -2,16 +2,52 @@ export class WikipediaService {
     private static readonly BASE_URL = 'https://en.wikipedia.org/api/rest_v1/page/summary/';
     private static readonly CONTENT_URL = 'https://en.wikipedia.org/w/api.php';
 
+    // Check if a title should redirect to Wikipedia instead of being displayed
+    private static shouldRedirectToWikipedia(title: string): boolean {
+        const nonArticleNamespaces = [
+            'File:', 'Image:', 'Media:', 'Category:', 'Template:', 'Help:', 
+            'Portal:', 'User:', 'Wikipedia:', 'Special:', 'Talk:', 'User_talk:', 
+            'Wikipedia_talk:', 'File_talk:', 'MediaWiki:', 'MediaWiki_talk:',
+            'Template_talk:', 'Help_talk:', 'Category_talk:', 'Portal_talk:',
+            'Module:', 'Module_talk:', 'TimedText:', 'TimedText_talk:'
+        ];
+        
+        return nonArticleNamespaces.some(namespace => 
+            title.startsWith(namespace) || title.includes(':' + namespace.replace(':', ''))
+        );
+    }
+
     static async fetchArticle(title: string) {
         try {
+            // Check if this should redirect to Wikipedia
+            if (this.shouldRedirectToWikipedia(title)) {
+                // Redirect to Wikipedia for non-article content
+                const wikipediaUrl = `https://en.wikipedia.org/wiki/${encodeURIComponent(title)}`;
+                window.location.href = wikipediaUrl;
+                return null; // This won't be reached due to redirect
+            }
+
             // First, get the summary
             const summaryResponse = await fetch(`${this.BASE_URL}${encodeURIComponent(title)}`);
             
             if (!summaryResponse.ok) {
+                // If article not found, redirect to Wikipedia search
+                if (summaryResponse.status === 404) {
+                    const wikipediaUrl = `https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(title)}`;
+                    window.location.href = wikipediaUrl;
+                    return null;
+                }
                 throw new Error('Article not found');
             }
             
             const summary = await summaryResponse.json();
+            
+            // Check if the returned content indicates it's a disambiguation or redirect page
+            if (summary.type === 'disambiguation' || summary.type === 'no-extract') {
+                const wikipediaUrl = `https://en.wikipedia.org/wiki/${encodeURIComponent(title)}`;
+                window.location.href = wikipediaUrl;
+                return null;
+            }
             
             // Get the full HTML content with images and tables
             const contentResponse = await fetch(

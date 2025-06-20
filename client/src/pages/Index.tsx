@@ -180,11 +180,15 @@ const Index: React.FC<IndexProps> = ({ initialArticle }) => {
 			setIsLoading(true);
 			try {
 				const articleData = await WikipediaService.fetchArticle(articleToLoad);
-				setArticle(articleData);
-				toast({
-					title: "Article loaded",
-					description: `Successfully loaded "${articleData.title}"`,
-				});
+				if (articleData) {
+					setArticle(articleData);
+					toast({
+						title: "Article loaded",
+						description: `Successfully loaded "${articleData.title}"`,
+					});
+				}
+				// If articleData is null, it means we're redirecting to Wikipedia
+				// The service will handle the redirect, so we don't need to do anything
 			} catch (error) {
 				console.error("Error fetching article:", error);
 				toast({
