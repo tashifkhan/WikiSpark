@@ -1,6 +1,37 @@
 {
-	"routes": [
-		{ "handle": "filesystem" },
-		{ "src": "/(.*)", "dest": "/index.html" }
-	]
+  "routes": [
+    {
+      "src": "/assets/.*",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      },
+      "continue": true
+    },
+    {
+      "src": "/wikispark-social-v2.webp",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      },
+      "continue": true
+    },
+    {
+      "src": "/favicon-v2.png",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      },
+      "continue": true
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(?:about|wiki(?:/.*)?)?/?",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/.*",
+      "status": 404,
+      "dest": "/index.html"
+    }
+  ]
 }

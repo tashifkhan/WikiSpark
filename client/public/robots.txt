@@ -1,0 +1,5 @@
+User-agent: ShapBot
+Disallow: /
+
+User-agent: *
+Disallow: /wiki/
