@@ -18,12 +18,13 @@ import {
 	createClearance,
 	readCookie,
 	verifyClearance,
-} from "./gate/clearance.ts";
-import { isAllowedBot, parseMode, suspicionReason } from "./gate/classify.ts";
-import { renderChallengePage } from "./gate/challengePage.ts";
-import { verifyTurnstileToken } from "./gate/turnstile.ts";
+} from "./gate/clearance.js";
+import { isAllowedBot, parseMode, suspicionReason } from "./gate/classify.js";
+import { renderChallengePage } from "./gate/challengePage.js";
+import { verifyTurnstileToken } from "./gate/turnstile.js";
 
 export const config = {
+	runtime: "nodejs",
 	matcher: ["/", "/about", "/wiki", "/wiki/:path*", "/_gate/verify"],
 };
 
